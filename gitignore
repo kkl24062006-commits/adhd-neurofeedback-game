@@ -1,0 +1,25 @@
+# Virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+
+# Auto-generated session artifacts (may contain participant data)
+data/session_log.csv
+data/last_profile.json
+data/report_*.png
+
+# Raw game recordings (large binaries)
+GAME_VIDEOS/
+
+# Superseded drafts
+archive_old_versions/
+
+# Vendored libraries (install via CDN/npm instead)
+eyetracker/webgazer.js
+
+# OS
+.DS_Store
+Thumbs.db
