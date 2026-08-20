@@ -8,12 +8,6 @@
 
 > Real-time EEG-driven game where a child's sustained attention controls a rocket's flight path. The system reads theta/beta ratio from a QNeuro 8-channel EEG cap and converts it into a focus score — when the child concentrates, the rocket climbs; when attention drifts, it falls. Preprocessing pipeline validated across 15 subjects with +11.43 dB mean SNR gain.
 
-<p align="center">
-  <img src="data/report_20260814_155837.png" alt="Session Dashboard" width="720"/>
-  <br/>
-  <em>End-of-session dashboard showing focus timeline, TBR trend with regression, and session metrics.</em>
-</p>
-
 ---
 
 ## Why This Exists
@@ -39,7 +33,7 @@ QNeuro 8-ch EEG Cap
 │       → Amplitude-based artifact rejection  │
 │       → Savitzky-Golay smoothing            │
 │       → Band power extraction (Welch PSD)   │
-│       → CSV logging (raw EEG, filtered,     │     
+│       → CSV logging (raw EEG, filtered,     │
 │         band powers, PPG)                   │
 └─────────────────────────────────────────────┘
         │
@@ -104,12 +98,18 @@ Ran the pipeline on recordings from 15 subjects to quantify the signal cleaning:
 | **Improvement** | **+11.43 ± 2.15 dB** |
 | Subjects with improvement | 15 / 15 |
 
-Full per-subject breakdown is in [`results/SNR_RESULT.txt`](results/SNR_RESULT.txt).
+Full per-subject breakdown in [`results/SNR_RESULT.txt`](results/SNR_RESULT.txt).
 
 <p align="center">
   <img src="data/fig1_psd_raw_vs_filtered.png" alt="PSD comparison" width="600"/>
   <br/>
   <em>Channel FZ power spectral density — raw (top) vs. filtered (bottom). The bandpass removes DC drift and line noise while keeping the delta-through-beta range intact.</em>
+</p>
+
+<p align="center">
+  <img src="data/fig1_tbr_trajectory.png" alt="TBR trajectory" width="600"/>
+  <br/>
+  <em>Theta/beta ratio trajectory over a single session — downward trend indicates improving focus.</em>
 </p>
 
 ---
@@ -133,7 +133,7 @@ adhd-neurofeedback-game/
 ├── results/
 │   └── SNR_RESULT.txt            # Per-subject SNR validation table
 ├── requirements.txt
-├── ISSUES.md                     # Known bugs and planned improvements
+├── .gitignore
 └── README.md
 ```
 
@@ -199,16 +199,6 @@ python results_figures.py                   # cross-session TBR trends
 ## Eye Tracking (optional)
 
 There's a separate WebGazer.js-based gaze tracker under `eyetracker/` — runs in the browser and logs fixation coordinates alongside the game. Still experimental; planned as a secondary attention metric independent of EEG.
-
----
-
-## Known Issues
-
-Documented in detail in [`ISSUES.md`](ISSUES.md). The main ones:
-
-- Distractors render on screen but don't actually interact with the rocket or score yet — the difficulty difference between levels is purely threshold-based for now
-- If the 20-second live baseline calibration captures garbage data (child moves, electrode pops), there's no way to recalibrate without restarting
-- No unit tests covering the signal processing math
 
 ---
 
