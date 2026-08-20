@@ -220,7 +220,3 @@ There's a separate WebGazer.js-based gaze tracker under `eyetracker/` — runs i
 Built for **BO3312 — Biomedical Instrumentation Lab** (Department of Biomedical Engineering). The project ties together real-time biosignal acquisition, online digital signal processing, and game-based HCI into something with actual clinical relevance.
 
 ---
-
-## License
-
-MIT — free for research and educational use.
